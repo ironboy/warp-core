@@ -7,6 +7,9 @@
   "bugs": {
     "url": "https://github.com/ironboy/all-that-sass/issues"
   },
+  "bin": {
+    "react-warp-core": "./bin/main.js"
+  },
   "bundleDependencies": [],
   "dependencies": {
     "chalk": "^2.4.1",
@@ -20,13 +23,13 @@
   "engines": {
     "node": ">=9.0"
   },
-  "homepage": "https://github.com/ironboy/all-that-sass#readme",
+  "homepage": "https://github.com/ironboy/warp-core#readme",
   "license": "MIT",
   "main": "index.js",
-  "name": "all-that-sass",
+  "name": "react-warp-core",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ironboy/all-that-sass.git"
+    "url": "git+https://github.com/ironboy/warp-core.git"
   },
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
