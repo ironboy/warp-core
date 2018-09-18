@@ -14,7 +14,7 @@ module.exports = function(config, basePath){
   config.module.rules.push({
     test: /\.js/,
     use: [
-      {loader: path.join(basePath, 'node_modules', 'warp-core', 'html-to-render.js')}
+      {loader: path.join(basePath, 'node_modules', 'react-warp-core', 'html-to-render.js')}
     ]
   });
 
