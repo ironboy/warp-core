@@ -1,5 +1,9 @@
 module.exports = function(config, basePath){
-  
+
+  // hello nvm! ;)
+  const exec = (require('child_process')).execSync;
+  exec('npm rebuild node-sass');
+
   const path = require('path');
 
   // Delete the rule property forcing linting to be first
