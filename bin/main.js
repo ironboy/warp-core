@@ -56,7 +56,7 @@ async function makeProgress(){
         process.exit();
       }
     }
-    await asleep(reallyDone ? 10 : !lastStart || lastStart.step < 3 ? 2500 : 800);
+    await asleep(reallyDone ? 10 : !lastStart || lastStart.step < 3 ? 2500 : 1250);
    }
 }
 makeProgress();

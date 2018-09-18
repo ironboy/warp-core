@@ -65,7 +65,7 @@ tasksFuncs['Ejecting the project'] = () => {
 }
 
 tasksFuncs['Installing Warp-Core (extra webpack loaders etc)'] = () => {
-  exec('npm install ' + paths.myBase, {windowsHide: true});
+  exec('npm install react-warp-core', {windowsHide: true});
   return {success: true};
 }
 
