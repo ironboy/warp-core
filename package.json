@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "Thomas Frank",
+    "email": "thomas@nodebite.se",
+    "url": "http://nodebite.se"
+  },
+  "bugs": {
+    "url": "https://github.com/ironboy/all-that-sass/issues"
+  },
+  "bundleDependencies": [],
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "chokidar": "2.0.4",
+    "ncp": "^2.0.0",
+    "progress": "^2.0.0",
+    "rimraf": "^2.6.2"
+  },
+  "deprecated": false,
+  "description": "Yummy React extras",
+  "engines": {
+    "node": ">=9.0"
+  },
+  "homepage": "https://github.com/ironboy/all-that-sass#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "all-that-sass",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ironboy/all-that-sass.git"
+  },
+  "version": "0.1.1"
+}
