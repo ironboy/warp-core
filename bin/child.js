@@ -65,12 +65,12 @@ tasksFuncs['Ejecting the project'] = () => {
 }
 
 tasksFuncs['Installing Warp-Core (extra webpack loaders etc)'] = () => {
-  exec('npm install react-warp-core', {windowsHide: true});
+  exec('npm install react-warp-core', {windowsHide: true, cwd: paths.projectFolder});
   return {success: true};
 }
 
 tasksFuncs['Adding SCSS/SASS support'] = () => {
-  exec('npm install node-sass sass-loader', {windowsHide: true});
+  exec('npm install node-sass sass-loader', {windowsHide: true, cwd: paths.projectFolder});
   return {success: true};
 }
 
@@ -92,7 +92,7 @@ tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
 }
 
 tasksFuncs['Installing the web server Express'] = () => {
-  exec('npm install express', {windowsHide: true});
+  exec('npm install express', {windowsHide: true, cwd: paths.projectFolder});
   return {success: true};
 }
 
