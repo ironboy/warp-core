@@ -124,6 +124,11 @@ tasksFuncs['Adding a folder for the Express app'] = () => {
   return {success: true}
 }
 
+tasksFuncs['Installing react-router-dom'] = () => {
+  exec('npm install react-router-dom@4.3.1', {windowsHide: true, cwd: paths.projectFolder});
+  return {success: true};
+}
+
 tasksFuncs['Removing the src folder from create react app'] = () => {
   const srcFolder = path.join(paths.projectFolder, 'src');
   return new Promise((res,rej) => {
