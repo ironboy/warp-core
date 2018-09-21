@@ -3,7 +3,6 @@ const fs = require('fs');
 const exec = (require('child_process')).execSync;
 const ncp = require('ncp');
 const rimraf = require('rimraf');
-const npm = require('npm-cmd');
 
 // Paths (mostly set in installReact)
 const paths = {
@@ -13,14 +12,12 @@ const paths = {
 // a function to run npm installs, run async
 function npmInstall(...packages){
   return new Promise((res, rej) => {
-    npm.install(...packages, {save: true, cwd: paths.projectFolder}, (err)=>{
-      if(err){
-        res({error: JSON.stringify(error)})
-      }
-      else {
-        res({success: true});
-      }
-    });
+    // yeah we had other code here before
+    // now we are just writing to package.json
+    let p = require(path.join(paths.projectFolder, 'package.json'));
+    for(let p of packages){
+
+    }
   });
 }
 
@@ -79,12 +76,18 @@ tasksFuncs['Ejecting the project'] = () => {
 
 }
 
-tasksFuncs['Installing Warp-Core (extra webpack loaders etc)'] = async () => {
-  return await npmInstall(['react-warp-core']);
-}
-
-tasksFuncs['Adding SCSS/SASS support'] = async () => {
-  return await npmInstall(['node-sass', 'sass-loader']);
+taskFuncs['Adding modules to package.json'] = () => {
+  let pjPath = path.join(paths.projectFolder, 'package.json');
+  let pj = require(pjPath);
+  Object.assign(pj.dependencies, {
+    "express": "^4.16.3",
+    "node-sass": "^4.9.3",
+    "react-router-dom": "^4.3.1",
+    "sass-loader": "^7.1.0"
+  });
+  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
+  // Actual install done in mod-webpack-config... exec('npm install')
+  // since it doesn't seem to work to do that from here.
 }
 
 tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
@@ -102,10 +105,6 @@ tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
     );
   }
   return {success: true};
-}
-
-tasksFuncs['Installing the web server Express'] = async () => {
-  return await npmInstall(['express']);
 }
 
 tasksFuncs['Adding proxy settings for Express'] = () => {
@@ -134,10 +133,6 @@ tasksFuncs['Adding a folder for the Express app'] = () => {
     );
   }
   return {success: true}
-}
-
-tasksFuncs['Installing react-router-dom'] = async () => {
-  return await npmInstall(['react-router-dom@4.3.1']);
 }
 
 tasksFuncs['Removing the src folder from create react app'] = () => {

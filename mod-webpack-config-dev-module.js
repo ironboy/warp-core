@@ -2,7 +2,8 @@ module.exports = function(config, basePath){
 
   // hello nvm! ;)
   const exec = (require('child_process')).execSync;
-  exec('npm rebuild node-sass');
+  exec('npm install');
+  // exec('npm rebuild node-sass'); // needed still?
 
   const path = require('path');
 
