@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const path = require('path');
 const fork = require('child_process').fork;
-const child = fork(path.join(__dirname,'child.js'), process.argv[2] ? [process.argv[2]] : [], {silent: true});
+const child = fork(path.join(__dirname,'child.js'), process.argv[2] ? [process.argv[2]] : [], {silent: process.argv[3] === '-debug' ? false : true});
 const ProgressBar = require('progress');
 const chalk = require('chalk');
 

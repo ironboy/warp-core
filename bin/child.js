@@ -51,6 +51,22 @@ tasksFuncs['Installing React using create-react-app'] = () => {
   return {success: true};
 }
 
+tasksFuncs['Adding modules to package.json'] = () => {
+  let myVersion = (require(path.join(paths.myBase, 'package.json'))).version;
+  let pjPath = path.join(paths.projectFolder, 'package.json');
+  let pj = require(pjPath);
+  Object.assign(pj.dependencies, {
+    "express": "^4.16.3",
+    "node-sass": "^4.9.3",
+    "react-router-dom": "^4.3.1",
+    "react-warp-core": "^" + myVersion,
+    "sass-loader": "^7.1.0"
+  });
+  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
+  return {success: true};
+  // Actual install done by the eject script :D
+}
+
 tasksFuncs['Ejecting the project'] = () => {
   // Eject the React project if not done
   if(!fs.existsSync(paths.configFolder)){
@@ -74,20 +90,6 @@ tasksFuncs['Ejecting the project'] = () => {
     return {success: true};
   }
 
-}
-
-taskFuncs['Adding modules to package.json'] = () => {
-  let pjPath = path.join(paths.projectFolder, 'package.json');
-  let pj = require(pjPath);
-  Object.assign(pj.dependencies, {
-    "express": "^4.16.3",
-    "node-sass": "^4.9.3",
-    "react-router-dom": "^4.3.1",
-    "sass-loader": "^7.1.0"
-  });
-  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
-  // Actual install done in mod-webpack-config... exec('npm install')
-  // since it doesn't seem to work to do that from here.
 }
 
 tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
