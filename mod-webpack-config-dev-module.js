@@ -1,10 +1,26 @@
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = function(config, basePath){
 
-  // hello nvm! ;)
+  // This has nothing to do with webpack but is
+  // here since this code runs on a npm start
+  
+  // 1) node-sass needs to be rebuilt for different node versions
   const exec = (require('child_process')).execSync;
   exec('npm rebuild node-sass');
 
-  const path = require('path');
+  // 2) we want to start up the express starter/restarter
+  (require('./express-starter.js'))(basePath);
+
+
+  // Add a webpack provider plugin
+  new webpack.ProvidePlugin({
+    'React': 'react'
+  });
+
+
+  // NOW LET'S START MODIFYING WHAT WEBPACK LOADERS ARE USED
 
   // Delete the rule property forcing linting to be first
   delete config.module.rules[0].enforce;
@@ -42,9 +58,6 @@ module.exports = function(config, basePath){
     }
     return x;
   });
-
-  // Add the express starter/restarter
-  (require('./express-starter.js'))(basePath);
 
   return config;
 }

@@ -1,0 +1,16 @@
+{
+  "React": "react",
+  "ReactDOM": "react-dom",
+  "{BrowserRouter as Router}": "react-router-dom",
+  "{Route}": "react-router-dom",
+  "{NavLink}": "react-router-dom",
+  "{Link}": "react-router-dom",
+  "{observable}": "mobx",
+  "{observer}": "mobx-react", 
+  "registerServiceWorker": "registerServiceWorker",
+  "{Component}": "react",
+  "  MyComponent": "Component/Component",
+  "    App" : "App/App",
+  "    Clock": "Clock/Clock",
+  "    TodoList": "TodoList/TodoList"
+}

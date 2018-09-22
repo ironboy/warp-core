@@ -5,15 +5,21 @@
 const path = require('path');
 const fs = require('fs');
 const chokidar = require('chokidar'); // is included in react-start-app
+const includeCommonImports = require(path.join(__dirname, 'include-common-imports.js'));
 
 // path to src folder
 const srcFolder = path.join(process.cwd(), 'src');
 
+
 // get the contents of a list of htm/html and js files
 function collect(){
+  let arrOfJsFiles = [];
   let all = {nameToContent: {}, contentToName: {}};
   let files = getFiles();
   for(let file of files){
+     if(file.endsWith('.js')){
+       arrOfJsFiles.push(file);
+     }
      if(file.endsWith('.jsx') || file.endsWith('.html') || file.endsWith('.htm') || file.endsWith('.js')){
        all.nameToContent[file] = fs.readFileSync(file, 'utf-8');
        all.contentToName[all.nameToContent[file]] = file;
@@ -33,6 +39,15 @@ function getFiles(folder = srcFolder){
     }
   }
   return all;
+}
+
+function touch(path){
+  if(fs.existsSync(path)){
+    let s = fs.statSync(path);
+    let atime = new Date(s.atime);
+    let mtimeChanged = new Date(new Date(s.mtime).getTime() + 1000);
+    fs.utimesSync(path, atime, mtimeChanged);
+  }
 }
 
 let last;
@@ -57,22 +72,20 @@ module.exports = function(source){
       );
       source += '\nfunction __html(){return (' + html + ');}';
     }
+    // include common imports
+    // - inspired by the resolve webpack plugin
+    source = includeCommonImports(path, source);
   }
   last = Date.now();
   return source;
 }
 
 // watch for changes in html files
-// then trigger a webpack by making a small change in the js file
+// then trigger a webpack compile by making a small change in the js file
 // (and unchange again a second later)
 chokidar.watch(srcFolder, {ignored: /(^|[\/\\])\../}).on('all', (event, file) => {
   if(file.endsWith('.html') || file.endsWith('.htm') || file.endsWith('.jsx')){
      let jsFile = file.split('.').slice(0, -1).concat('js').join('.');
-     if(fs.existsSync(jsFile)){
-       let content = fs.readFileSync(jsFile, 'utf-8');
-       let content2 = content + '\n';
-       fs.writeFileSync(jsFile, content2, 'utf-8');
-       setTimeout(() => fs.writeFileSync(jsFile, content, 'utf-8', 100));
-     }
+     touch(jsFile);
   }
 });

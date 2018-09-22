@@ -56,11 +56,14 @@ tasksFuncs['Adding modules to package.json'] = () => {
   let pjPath = path.join(paths.projectFolder, 'package.json');
   let pj = require(pjPath);
   Object.assign(pj.dependencies, {
+    "react-warp-core": "^" + myVersion,
     "express": "^4.16.3",
     "node-sass": "^4.9.3",
     "react-router-dom": "^4.3.1",
-    "react-warp-core": "^" + myVersion,
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "mobx": "^5.1.2",
+    "mobx-react": "^5.2.8",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5"
   });
   fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
   return {success: true};
@@ -91,6 +94,62 @@ tasksFuncs['Ejecting the project'] = () => {
   }
 
 }
+
+tasksFuncs['Adding transform-decorators as a Babel plugin'] = () => {
+  let pjPath = path.join(paths.projectFolder, 'package.json');
+  let pj = require(pjPath);
+  pj.babel = pj.babel || {};
+  pj.babel.plugins = pj.babel.plugins || [];
+  pj.babel.plugins.push('transform-decorators-legacy');
+  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
+  return {success: true};
+}
+
+tasksFuncs['Stop VSC decorator warnings by adding a tsconfig.json file'] = () => {
+  let settings = {
+    "compilerOptions": {
+      "experimentalDecorators": true,
+      "allowJs": true,
+      "noUnusedLocals": true
+    }
+  } 
+  fs.writeFileSync(
+    path.join(paths.projectFolder, 'tsconfig.json'),
+    JSON.stringify(settings,'','  '),
+    'utf-8'
+  );
+  return {success: true};
+}
+
+tasksFuncs['Relaxing eslint rules in package.json'] = () => {
+  let pjPath = path.join(paths.projectFolder, 'package.json');
+  let pj = require(pjPath);
+  pj.eslintConfig = pj.eslintConfig|| {};
+  pj.eslintConfig.rules = pj.eslintConfig.rules || {};
+  Object.assign(pj.eslintConfig.rules, {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off",
+    "no-unused-expressions": "off",
+    "no-unused-vars": "off",
+    "no-undef": "off"
+  });
+  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
+  return {success: true};
+}
+
+tasksFuncs['Adding react-warp-core-options to package.json'] = () => {
+  let pjPath = path.join(paths.projectFolder, 'package.json');
+  let pj = require(pjPath);
+  Object.assign(pj, {
+    "react-warp-core": {
+      "path-to-common-imports": "common-imports.json"
+    }
+  });
+  fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
+  return {success: true};
+}
+
+
 
 tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
   let modFileContents = fs.readFileSync(path.join(paths.myBase,'mod-webpack.config.dev.js'),'utf-8');
@@ -134,7 +193,7 @@ tasksFuncs['Adding a folder for the Express app'] = () => {
       path.join(expressFolder,'app.js'),
     );
   }
-  return {success: true}
+  return {success: true};
 }
 
 tasksFuncs['Removing the src folder from create react app'] = () => {
@@ -157,6 +216,15 @@ tasksFuncs['Installing a src folder with an example application'] = () => {
     })
   });
 }
+
+tasksFuncs['Installing a common-imports.json example file'] = () => {
+  fs.copyFileSync(
+    path.join(paths.myBase,'common-imports-example.json'),
+    path.join(paths.projectFolder, 'common-imports.json'),
+  );
+  return {success: true};
+}
+
 
 async function asleep(ms){
   return new Promise((res) => setTimeout(res, ms));
