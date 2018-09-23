@@ -25,6 +25,7 @@ function parseImports(){
   if(json){
     for(let i in json){
       let moduleName = i.trimLeft();
+      if(moduleName.startsWith('/*')){ continue; }
       let indent = i.length - moduleName.length;
       let _path = json[i];
       let inNodeModules = true;
