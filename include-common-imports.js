@@ -22,7 +22,6 @@ function parseImports(){
   let json;
   try { json = JSON.parse(fs.readFileSync(pathToCommonImports, 'utf-8')); }
   catch(e){}
-
   if(json){
     for(let i in json){
       let moduleName = i.trimLeft();
@@ -31,10 +30,15 @@ function parseImports(){
       let inNodeModules = true;
       try { require.resolve(_path); }
       catch(e){ inNodeModules = false; }
+      let orgPath = _path;
       _path = inNodeModules ? _path : path.join(srcFolder, _path);
+      let syntax = 'import ' + moduleName + " from '" + _path + "'";
+      if(!orgPath){
+        syntax = 'import "' + moduleName + '"';
+      }
       imports.push({
         i: imports.length,
-        syntax: 'import ' + moduleName + " from '" + _path + "'", 
+        syntax: syntax, 
         path: _path,
         indent: indent,
         descendants: []
@@ -44,7 +48,9 @@ function parseImports(){
       findDescendants(x, imports);
     }
   }
+  
 }
+
 
 
 module.exports = function includer(path, source){
