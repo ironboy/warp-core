@@ -6,7 +6,6 @@ import './TodoList.scss';
   nextId = Math.random();
 
   async start(){
-    console.log(this)
     // connect to the store (defined in utilities/Component)
     let noStore = Object.keys(this.store).length === 0;
     this.store.list = this.store.list || [];
