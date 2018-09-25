@@ -3,9 +3,9 @@
   {/* A quote */}
   <div className="row">
     <div className="col-12">
-    <UncontrolledAlert color="primary" className="text-center mt-4 light-blue-bg">
+    <Alert isOpen={!this.alertClosed} toggle={() => this.alertClosed = true} color="primary" className="text-center mt-4 light-blue-bg">
      <i>»&nbsp;The frameworks are lovely, dark and deep.<br />But I have todo list code to compare and miles to go before I sleep.<br />And miles to go before I sleep.&nbsp;«</i>
-    </UncontrolledAlert>
+    </Alert>
     </div>
   </div>
 
