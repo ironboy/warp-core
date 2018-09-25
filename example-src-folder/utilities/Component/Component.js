@@ -24,9 +24,7 @@ export default class Component extends ReactComponent {
     
     // Share this.shared too
     this.shared = Component.shared;
-
-    // Key in stores that will not get 
-
+    
     // React to changes in the store and save to localStorage
     Component.saveDisposer = Component.saveDisposer || reaction(
       () => toJS(Component.store),
