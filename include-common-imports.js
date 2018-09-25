@@ -24,8 +24,13 @@ function parseImports(){
   catch(e){}
   if(json){
     for(let i in json){
+      let noImportsTo = false;
       let moduleName = i.trimLeft();
       if(moduleName.startsWith('/*')){ continue; }
+      if(moduleName.startsWith('!')){
+        moduleName = moduleName.substr(1);
+        noImportsTo = true;
+      }
       let indent = i.length - moduleName.length;
       let _path = json[i];
       let inNodeModules = true;
@@ -42,7 +47,8 @@ function parseImports(){
         syntax: syntax, 
         path: _path,
         indent: indent,
-        descendants: []
+        descendants: [],
+        noImportsTo: noImportsTo
       });
     }
     for(let x of imports){
@@ -52,12 +58,10 @@ function parseImports(){
   
 }
 
-
-
 module.exports = function includer(path, source){
   imports || parseImports();
   let me = imports.filter(x => x.path === path || x.path + '.js' === path)[0];
-  let importStr = imports
+  let importStr = me && me.noImportsTo ? '' : imports
     .filter(x => !me || !([me, ...me.descendants].includes(x)))
     .map(x => x.syntax)
     .join(';');

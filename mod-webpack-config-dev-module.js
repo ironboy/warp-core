@@ -44,7 +44,10 @@ module.exports = function(config, basePath){
     let newOne, index;
     x.oneOf.forEach((y, i) => {
       if((y.test + '').includes('.css')){
-        index = 1;
+        index = i;
+        // add source mapping
+        y.use[1].options.sourceMap = 1;
+        // copy
         newOne = JSON.parse(JSON.stringify(y));
       }
     });
