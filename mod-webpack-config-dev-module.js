@@ -13,13 +13,6 @@ module.exports = function(config, basePath){
   // 2) we want to start up the express starter/restarter
   (require('./express-starter.js'))(basePath);
 
-
-  // Add a webpack provider plugin
-  new webpack.ProvidePlugin({
-    'React': 'react'
-  });
-
-
   // NOW LET'S START MODIFYING WHAT WEBPACK LOADERS ARE USED
 
   // Delete the rule property forcing linting to be first

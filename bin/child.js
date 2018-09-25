@@ -63,7 +63,11 @@ tasksFuncs['Adding modules to package.json'] = () => {
     "sass-loader": "^7.1.0",
     "mobx": "^5.1.2",
     "mobx-react": "^5.2.8",
-    "babel-plugin-transform-decorators-legacy": "^1.3.5"
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.1.3",
+    "reactstrap": "^6.4.0",
+    "react-clock": "^2.3.0"
   });
   fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
   return {success: true};
