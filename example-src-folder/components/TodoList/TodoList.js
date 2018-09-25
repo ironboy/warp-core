@@ -8,24 +8,17 @@ import './TodoList.scss';
   async start(){
     // connect to the store (defined in utilities/Component)
     let noStore = Object.keys(this.store).length === 0;
-    this.store.list = this.store.list || [];
-    this.store.history = this.store.history || [];
-    this.store.historyPointer = this.store.historyPointer || 0;
-    this.store.alertClosed = this.store.alertClosed || false;
+    this.createStoreConnectedProperties({
+      list: [],
+      history: [],
+      historyPointer: 0,
+      alertClosed: false
+    });
     if(noStore){
       // fetch som example data i the store was empty
       this.store.list = await fetchJSON('/api/todo-list-example-data');
     }
   }
-
-  get list(){ return this.store.list; }
-  set list(x){ this.store.list = x; }
-  get history(){ return this.store.history; }
-  set history(x){ this.store.history = x; }
-  get historyPointer(){ return this.store.historyPointer; }
-  set historyPointer(x){ this.store.historyPointer = x; }
-  get alertClosed(){ return this.store.alertClosed; }
-  set alertClosed(x){ this.store.alertClosed = x; }
 
   get confirmModalSettings(){
     let that = this;
@@ -173,3 +166,7 @@ import './TodoList.scss';
   }
   
 }
+
+
+
+  

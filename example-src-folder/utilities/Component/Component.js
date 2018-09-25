@@ -24,7 +24,7 @@ export default class Component extends ReactComponent {
     
     // Share this.shared too
     this.shared = Component.shared;
-    
+
     // React to changes in the store and save to localStorage
     Component.saveDisposer = Component.saveDisposer || reaction(
       () => toJS(Component.store),
@@ -36,6 +36,22 @@ export default class Component extends ReactComponent {
     // If a method named start exists then call it
     // (more convinient than having to write a constructor in the class)
     typeof this.start === 'function' && this.start();
+  }
+
+  // A convenient way to connect properties to the store
+  createStoreConnectedProperties(settings){
+    for(let setting in settings){
+      (()=>{
+        let key = setting;
+        let _default = settings[key];
+        this.store[key] = this.store[key] || _default;
+        Object.defineProperty(this, key, {
+          set: x => this.store[key] = x,
+          get: () => this.store[key],
+          configurable: true
+        });
+      })();
+    }
   }
 
 }
