@@ -16,7 +16,7 @@ import './TodoList.scss';
     });
     if(noStore){
       // fetch som example data i the store was empty
-      this.store.list = await fetchJSON('/api/todo-list-example-data');
+      this.list = await fetchJSON('/api/todo-list-example-data');
     }
   }
 
@@ -91,8 +91,8 @@ import './TodoList.scss';
     // make a copy of the object so that
     // the history keeps the old version
     this.list[index] = {
-      ...this.list[index],
-      done: !this.list[index].done
+      ...item,
+      done: !item.done
     } 
   }
 
