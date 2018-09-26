@@ -4,6 +4,9 @@ import './App.scss';
   @observable style = {opacity: 0};
   
   async start(){
+    // Note: We don't use jQuery very much,
+    // in fact only in the code below
+
     // avoid FOUC by waiting for styles to load
     // and then fade in the app
     while(this.style.opacity < 1){
@@ -11,8 +14,9 @@ import './App.scss';
       let ok = $('body').css('font-family').length > 10;
       this.style.opacity += ok ? .03 : 0;
     }
-    // no focusing of buttons (the only jQuery used in our code)
-    $(document).on('focus', 'button', function(){ $(this).blur(); })
+
+    // no focusing of buttons when you click them
+    $(document).on('click', 'button', function(){ $(this).blur(); })
   }
 
 }

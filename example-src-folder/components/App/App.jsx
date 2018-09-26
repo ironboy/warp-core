@@ -6,8 +6,8 @@
     </header>
     <main className="flex-grow-1 container">
       <Route exact path="/">
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
+        <Row>
+          <Col className="col-12 col-lg-8 offset-lg-2">
             <Jumbotron className="mt-5 light-blue-bg">
               <h1 className="display-3">Welcome!</h1>
               <p className="lead">This is a simple example app, illustrating some of the things you can do with React Warp Core.</p>
@@ -26,8 +26,8 @@
                 <Link className="float-right" to="/todo-list"><Button color="light">Try out the todo list »</Button></Link>
               </p>
             </Jumbotron>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Route>
       <Route path="/clock" component={Clock}/>
       <Route path="/todo-list" component={TodoList}/>
