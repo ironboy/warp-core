@@ -4,7 +4,7 @@
     <header>
       <MainNav />
     </header>
-    <main className="flex-grow-1 container">
+    <Container tag="main" className="flex-grow-1">
       <Route exact path="/">
         <Row>
           <Col className="col-12 col-lg-8 offset-lg-2">
@@ -31,7 +31,7 @@
       </Route>
       <Route path="/clock" component={Clock}/>
       <Route path="/todo-list" component={TodoList}/>
-    </main>
+    </Container>
     <footer className="bg-light mt-3">
       <small>React Warp Core &ndash; example app&nbsp;&nbsp;© Thomas Frank</small>
     </footer>
