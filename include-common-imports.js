@@ -66,6 +66,7 @@ module.exports = function includer(path, source){
     .map(x => x.syntax)
     .join(';');
   importStr = importStr ? importStr + ';' : '';
+  importStr = importStr.split('\\').join('/'); 
   return importStr + source;
 }
 
