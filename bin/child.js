@@ -178,7 +178,7 @@ tasksFuncs['Adding proxy settings for Express'] = () => {
   let packageJson = require(packagePath);
   packageJson.proxy = {
     "/api$|/api/": {
-      "target": "http://localhost:5000",
+      "target": "http://localhost:3100",
       "pathRewrite": {
         "^/api" : "/"
       },
