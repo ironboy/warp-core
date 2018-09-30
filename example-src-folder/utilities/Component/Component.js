@@ -29,7 +29,11 @@ export default class Component extends ReactComponent {
     Component.saveDisposer = Component.saveDisposer || reaction(
       () => toJS(Component.store),
       () => {
-        localStorage.store = JSON.stringify(toJS(Component.store));
+        // Adding a little bit of throttling with set/clearTimeout
+        clearTimeout(Component.saveTimeout);
+        Component.saveTimeout = setTimeout(() => {
+          localStorage.store = JSON.stringify(toJS(Component.store));
+        }, 10);
       },
     );
 
