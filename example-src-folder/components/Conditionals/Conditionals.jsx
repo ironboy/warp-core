@@ -31,7 +31,7 @@ else { alert('Alt 4'); }`}
     <p><ExLink href="https://reactjs.org/docs/conditional-rendering.html">Read more about conditional rendering in jsx</ExLink>.</p>
 
     <h4 className="mt-4">Jsx with components for if, else if and else</h4>
-    <p>Here we introduce some components (<b>If</b>, <b>ElseIf</b>, and <b>Else</b>) that let's us do the same thing. (This is more reminiscent of how most traditional templating languages would look.)</p>
+    <p>Here we introduce some components (<b>If</b>, <b>ElseIf</b>, and <b>Else</b>) that let us do the same thing. (This is more reminiscent of how most traditional templating languages would look.)</p>
     <p>If you prefer this approach or "native" jsx is up to you!</p>
     <SyntaxHighlighter showLineNumbers={true} language='jsx' style={shstyle}>
 {`<If c={1 === 2}>

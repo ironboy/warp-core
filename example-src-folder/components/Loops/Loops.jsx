@@ -45,7 +45,7 @@ for(let item of this.arr){
     <p><ExLink href="https://reactjs.org/docs/lists-and-keys.html">Read more about loops, list and keys in jsx</ExLink>.</p>
 
     <h4 className="mt-4">Jsx with a component for loops</h4>
-    <p>Here we introduce a component &ndash; <b>Loop</b> &ndash; that let's us do the same thing. (This is more reminiscent of how most traditional templating languages would look.)</p>
+    <p>Here we introduce a component &ndash; <b>Loop</b> &ndash; that let us do the same thing. (This is more reminiscent of how most traditional templating languages would look.)</p>
     <p>The <b>Loop</b> component will automatically add the key attribute for each item.</p>
     <p>If you prefer this approach or "native" jsx is up to you!</p>
     <SyntaxHighlighter showLineNumbers={true} language='jsx' style={shstyle}>
