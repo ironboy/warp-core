@@ -26,7 +26,7 @@ export default class Component extends ReactComponent {
     this.shared = Component.shared;
 
     // React to changes in the store and save to localStorage
-    Component.saveDisposer = Component.saveDisposer || reaction(
+    reaction(
       () => toJS(Component.store),
       () => {
         // Adding a little bit of throttling with set/clearTimeout
