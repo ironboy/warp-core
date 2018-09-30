@@ -3,7 +3,7 @@
 
     <h2>Loops through lists</h2>
 
-    <h4 className="mt-4"s>Our list</h4>
+    <h4 className="mt-4">Our list</h4>
     <p>In the examples below we assume that we are working with this list:</p>
     <SyntaxHighlighter showLineNumbers={true} language='js' style={shstyle}>
 {`this.arr = [
@@ -15,7 +15,7 @@
     <p>Our end goal is a list looking like this:</p>
     <ul>
       <Loop i={this.arr}>{item =>
-        <li><b>{item.name}</b></li>
+        <li>{item.name}</li>
       }</Loop>
     </ul>
 
@@ -38,7 +38,7 @@ for(let item of this.arr){
     <SyntaxHighlighter showLineNumbers={true} language='jsx' style={shstyle}>
 {`<ul> 
   {this.arr.map(item =>
-    <li key={item.id}><b>{item.name}</b></li>
+    <li key={item.id}>{item.name}</li>
   )}
 </ul>}`}
     </SyntaxHighlighter>
@@ -51,7 +51,7 @@ for(let item of this.arr){
     <SyntaxHighlighter showLineNumbers={true} language='jsx' style={shstyle}>
 {`<ul>
   <Loop i={this.arr}>{item =>
-    <li><b>{item.name}</b></li>
+    <li>{item.name}</li>
   }</Loop>
 </ul>`}
     </SyntaxHighlighter>

@@ -35,11 +35,9 @@ export default class Loop extends Component {
         keyVal = this.all.length;
       }
       if(twoArgs){
-        console.log('2')
         x = this.props.children(keyVal, sepVals ? sepVals[item] : item);
       }
       else {
-        console.log('1')
         x = this.props.children(sepVals ? sepVals[item] : item);
       }
       // inject the key
