@@ -67,7 +67,8 @@ tasksFuncs['Adding modules to package.json'] = () => {
     "jquery": "^3.3.1",
     "bootstrap": "^4.1.3",
     "reactstrap": "^6.4.0",
-    "react-clock": "^2.3.0"
+    "react-clock": "^2.3.0",
+    "react-syntax-highlighter": "^8.0.1"
   });
   fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
   return {success: true};

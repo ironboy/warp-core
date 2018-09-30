@@ -1,1 +1,1 @@
-export default class ConfirmModal extends React.Component {}
+export default class ConfirmModal extends Component {}

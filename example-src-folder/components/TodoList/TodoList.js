@@ -1,4 +1,5 @@
 import './TodoList.scss';
+
 @observer export default class TodoList extends Component {
 
   @observable itemName = '';
@@ -15,7 +16,7 @@ import './TodoList.scss';
       alertClosed: false
     });
     if(noStore){
-      // fetch som example data if the store was empty
+      // fetch som example data i the store was empty
       this.list = await fetchJSON('/api/todo-list-example-data');
     }
   }

@@ -8,6 +8,8 @@
   "  Clock": "components/Clock/Clock",
   "  TodoList": "components/TodoList/TodoList",
   "  MainNav": "components/MainNav/MainNav",
+  "  Conditionals": "components/Conditionals/Conditionals",
+  "  Loops": "components/Loops/Loops",
 
   "/*3": "--------  Utilities (Component based) --------",
   "  NavLink": "utilities/NavLink/NavLink",
@@ -15,6 +17,10 @@
   "  Route": "utilities/Route/Route",
   "  ExLink": "utilities/ExternalLink/ExternalLink",
   "  ConfirmModal": "utilities/ConfirmModal/ConfirmModal",
+  "  If": "utilities/If/If",
+  "  ElseIf": "utilities/ElseIf/ElseIf",
+  "  Else": "utilities/Else/Else",
+  "  Loop": "utilities/Loop/Loop",
  
   "/*4": "--------- Utilities (non-components) ---------",
   "!registerServiceWorker": "utilities/registerServiceWorker",
@@ -23,7 +29,8 @@
 
   "/*5": "------------ React core + routing ------------", 
   "React": "react",
-  "{Component as ReactComponent}": "react", 
+  "{Component as ReactComponent}": "react",
+  "{Fragment}": "react", 
   "ReactDOM": "react-dom",
   "ReactDOMServer": "react-dom/server",
   "{BrowserRouter as Router}": "react-router-dom",
@@ -133,5 +140,9 @@
   "{UncontrolledDropdown}": "reactstrap",
   "{UncontrolledNavDropdown}": "reactstrap",
   "{UncontrolledTooltip}": "reactstrap",
-  "{Util}": "reactstrap"
+  "{Util}": "reactstrap",
+
+  "/*9": "------------ Syntax highlighting -------------",
+  "SyntaxHighlighter": "react-syntax-highlighter/prism",
+  "shstyle": "react-syntax-highlighter/styles/prism/duotone-light"
 }

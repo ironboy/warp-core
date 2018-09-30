@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 
 module.exports = function(config, basePath){
@@ -12,6 +13,27 @@ module.exports = function(config, basePath){
 
   // 2) we want to start up the express starter/restarter
   (require('./express-starter.js'))(basePath);
+
+  // 3) modules that the syntax highlighter depends on
+  //    aren't compatible with webpacks json loader
+  (() => {
+    let m1 = path.join(basePath, 'node_modules/character-reference-invalid');
+    let m2 = path.join(basePath, 'node_modules/character-entities-legacy');
+    for(let m of [m1, m2]){
+      if(fs.existsSync(path.join(m,'index.json'))){
+        let p = path.join(m,'index.json');
+        let p2 = path.join(m, 'index.js');
+        let pold = path.join(m,'old_index.json');
+        let pa = path.join(m, 'package.json');
+        let c = fs.readFileSync(p, 'utf-8');
+        fs.writeFileSync(p2, 'module.exports = ' + c, 'utf-8');
+        let _package = require(pa);
+        _package.main = 'index.js';
+        fs.writeFileSync(pa, JSON.stringify(_package,'','  '), 'utf-8');
+        fs.renameSync(p, pold);
+      }
+    }
+  })();
 
   // NOW LET'S START MODIFYING WHAT WEBPACK LOADERS ARE USED
 

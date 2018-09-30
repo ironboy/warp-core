@@ -16,6 +16,12 @@
         <NavItem>
           <NavLink to="/todo-list" activeClassName = "active">Todo list</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink to="/conditionals" activeClassName = "active">If-else</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/loops" activeClassName = "active">Loops</NavLink>
+        </NavItem>
       </Nav>
     </Collapse>
   </Navbar>
