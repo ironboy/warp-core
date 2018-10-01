@@ -68,7 +68,9 @@ tasksFuncs['Adding modules to package.json'] = () => {
     "bootstrap": "^4.1.3",
     "reactstrap": "^6.4.0",
     "react-clock": "^2.3.0",
-    "react-syntax-highlighter": "^8.0.1"
+    "react-syntax-highlighter": "^8.0.1",
+    "ncp": "^2.0.0",
+    "compression": "^1.7.3"
   });
   fs.writeFileSync(pjPath, JSON.stringify(pj,'','  '), 'utf-8');
   return {success: true};
@@ -154,8 +156,6 @@ tasksFuncs['Adding react-warp-core-options to package.json'] = () => {
   return {success: true};
 }
 
-
-
 tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
   let modFileContents = fs.readFileSync(path.join(paths.myBase,'mod-webpack.config.dev.js'),'utf-8');
   let configFileContents =  fs.readFileSync(path.join(paths.configFolder,'webpack.config.dev.js'),'utf-8');
@@ -170,6 +170,18 @@ tasksFuncs['Patching the dev config to use new webpack loaders'] = () => {
       path.join(paths.configFolder,'webpack.config.dev.js'),
     );
   }
+  return {success: true};
+}
+
+tasksFuncs['Replacing the production config'] = () => {
+  fs.renameSync(
+    path.join(paths.configFolder,'webpack.config.prod.js'),
+    path.join(paths.configFolder,'org-webpack.config.prod.js'),
+  );
+  fs.copyFileSync(
+    path.join(paths.myBase,'webpack-config-prod-replacer.js'),
+    path.join(paths.configFolder, 'webpack.config.prod.js'),
+  );
   return {success: true};
 }
 
@@ -229,7 +241,6 @@ tasksFuncs['Installing a common-imports.json example file'] = () => {
   );
   return {success: true};
 }
-
 
 async function asleep(ms){
   return new Promise((res) => setTimeout(res, ms));
