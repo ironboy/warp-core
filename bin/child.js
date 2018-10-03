@@ -13,7 +13,7 @@ const paths = {
 // (will be added below)
 const tasksFuncs = {};
 
-tasksFuncs['Copying necessary npm modules'] = () => {
+tasksFuncs['Basic checks'] = () => {
   let a = process.argv;
   if(a.length < 3){
     return {
@@ -30,9 +30,13 @@ tasksFuncs['Copying necessary npm modules'] = () => {
       error: 'The folder ' + a[2] + ' already exists... Please remove it!'
     };
   }
-  process.chdir(a[2]);
-  paths.projectFolder = process.cwd();
 
+  paths.projectFolder = path.join(process.cwd(), a[2]);
+
+  return {success: true};
+}
+
+tasksFuncs['Copying necessary npm modules'] = () => {
   let source = path.join(paths.myBase, 'node_modules');
   let destination = path.join(paths.myBase, 'template', 'node_modules');
   return new Promise((res,rej) => {
@@ -46,6 +50,38 @@ tasksFuncs['Copying necessary npm modules'] = () => {
 tasksFuncs['Installing the project folder'] = () => {
   let source = path.join(paths.myBase, 'template');
   let destination = paths.projectFolder;
+  return new Promise((res,rej) => {
+    ncp(source, destination, (err)=> {
+      if(err){ res({error:err}); }
+      else { res({success: true}); }
+    })
+  });
+}
+
+tasksFuncs['Removing extranous node_modules, substep 1'] = () => {
+  let toRemove = path.join (paths.myBase, 'node_modules');
+  return new Promise((res,rej) => {
+    rimraf(toRemove, (err)=> {
+      if(err){ res({error:err}); }
+      else { res({success: true}); }
+    })
+  });
+}
+
+tasksFuncs['Removing extranous node_modules, substep 2'] = () => {
+  let toRemove = path.join (paths.myBase, 'template', 'node_modules');
+  return new Promise((res,rej) => {
+    rimraf(toRemove, (err)=> {
+      if(err){ res({error:err}); }
+      else { res({success: true}); }
+    })
+  });
+}
+
+
+tasksFuncs['Copying warp-core into npm_modules'] = () => {
+  let source = paths.myBase;
+  let destination = path.join(paths.projectFolder, 'node_modules', 'react-warp-core');
   return new Promise((res,rej) => {
     ncp(source, destination, (err)=> {
       if(err){ res({error:err}); }
