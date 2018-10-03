@@ -13,15 +13,5 @@ export default class Route extends Component {
     if(c){ this.propsModded.render = () => c; }
     delete this.propsModded.children;
   }
-
-  componentWillUpdate(){
-    // Fixes a problem with activeLinks not changing
-    // in the MainNav, by updating it on route change
-    if(this.shared && this.shared.theMainNav){
-      let mainNav = this.shared.theMainNav;
-      clearTimeout(Route.nbTimeout);
-      Route.nbTimeout = setTimeout(() => mainNav.forceUpdate(), 50);
-    }
-  }
   
 }

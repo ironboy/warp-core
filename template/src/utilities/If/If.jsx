@@ -1,0 +1,1 @@
+this.props && <Fragment>{this.children}</Fragment>

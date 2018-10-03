@@ -1,4 +1,8 @@
-export default class Loop extends Component {
+@observer export default class Loop extends Component {
+
+  componentWillReact(){
+    this.start();
+  }
 
   start(){
     this.all = [];

@@ -1,5 +1,9 @@
-export default class If extends Component {
-  
+@observer export default class If extends Component {
+
+  componentWillReact(){
+    this.start();
+  }
+
   start(){
     if(this.props.condition || this.props.c){
       this.children = this.props.children;
