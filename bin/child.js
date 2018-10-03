@@ -13,7 +13,7 @@ const paths = {
 // (will be added below)
 const tasksFuncs = {};
 
-taskFuncs['Copying necessary npm modules'] = () => {
+tasksFuncs['Copying necessary npm modules'] = () => {
   let a = process.argv;
   if(a.length < 3){
     return {
@@ -43,7 +43,7 @@ taskFuncs['Copying necessary npm modules'] = () => {
   });
 }
 
-taskFuncs['Installing the project folder'] = () => {
+tasksFuncs['Installing the project folder'] = () => {
   let source = path.join(paths.myBase, 'template');
   let destination = paths.projectFolder;
   return new Promise((res,rej) => {
