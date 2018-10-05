@@ -5,7 +5,8 @@ const mkdirp = require('mkdirp');
 
 const writeFile = util.promisify(fs.writeFile);
 
-const componentDir = path.join(__dirname, '/src/components');
+const componentDir = path.join(__dirname, '../src/components');
+const commonImportsFile = path.join(__dirname, '../common-imports.json');
 
 if (!process.argv[2]) {
   console.error('Please provide a component name');
@@ -18,7 +19,8 @@ if (!process.argv[2]) {
           process.argv[2]
         )} created and added to common-imports.json`
       )
-    );
+    )
+    .catch(error => error);
 }
 
 async function writeFiles(componentName) {
@@ -29,7 +31,8 @@ async function writeFiles(componentName) {
   try {
     createDir(`${componentDir}/${componentName}`);
   } catch (error) {
-    return console.error(error.message);
+    console.error(error.message);
+    throw error;
   }
 
   await writeFile(
@@ -39,7 +42,8 @@ async function writeFiles(componentName) {
 </Fragment>`
   ).catch(error => {
     if (error) {
-      return console.error('Could not write .jsx file: ' + error.message);
+      console.error('Could not write .jsx file: ' + error.message);
+      throw error;
     }
   });
 
@@ -65,9 +69,12 @@ function createDir(dir) {
 
 function writeToCommonImports(componentName) {
   let content = fs
-    .readFileSync('common-imports.json')
+    .readFileSync(commonImportsFile)
     .toString()
     .split('\n');
+  if (content.find(line => line.startsWith(`  "  ${componentName}"`))) {
+    return;
+  }
   const targetIndex = content.findIndex(line => line.startsWith('  "/*3"'));
   content.splice(
     targetIndex - 1,
@@ -76,7 +83,7 @@ function writeToCommonImports(componentName) {
   );
   try {
     if (targetIndex > 0) {
-      fs.writeFileSync('common-imports.json', content.join('\n'));
+      fs.writeFileSync(commonImportsFile, content.join('\n'));
     } else {
       throw new Error('could not find line starting with \'  "/*3"\'');
     }
