@@ -10,13 +10,20 @@ const componentDir = path.join(__dirname, '/src/components');
 if (!process.argv[2]) {
   console.error('Please provide a component name');
 } else {
-  writeFiles(process.argv[2]);
+  writeFiles(process.argv[2])
+    .then(() => writeToCommonImports(capitalizeFirstLetter(process.argv[2])))
+    .then(() =>
+      console.log(
+        `Component ${capitalizeFirstLetter(
+          process.argv[2]
+        )} created and added to common-imports.json`
+      )
+    );
 }
 
 async function writeFiles(componentName) {
   if (!componentName.match(/^[A-Z]/)) {
-    componentName =
-      componentName.charAt(0).toUpperCase() + componentName.slice(1);
+    componentName = capitalizeFirstLetter(componentName);
   }
 
   try {
@@ -54,4 +61,30 @@ function createDir(dir) {
   } else {
     throw new Error('Component directory already exists!');
   }
+}
+
+function writeToCommonImports(componentName) {
+  let content = fs
+    .readFileSync('common-imports.json')
+    .toString()
+    .split('\n');
+  const targetIndex = content.findIndex(line => line.startsWith('  "/*3"'));
+  content.splice(
+    targetIndex - 1,
+    0,
+    `  "  ${componentName}": "components/${componentName}/${componentName}",`
+  );
+  try {
+    if (targetIndex > 0) {
+      fs.writeFileSync('common-imports.json', content.join('\n'));
+    } else {
+      throw new Error('could not find line starting with \'  "/*3"\'');
+    }
+  } catch (error) {
+    console.error('Could not write common-imports: ' + error.message);
+  }
+}
+
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
