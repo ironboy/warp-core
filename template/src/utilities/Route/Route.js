@@ -5,8 +5,12 @@
 // They should display their children
 // when the route matches (and not always).
 
-export default class Route extends Component {
+@withRouter @observer export default class Route extends Component {
 
+  componentWillReact(){
+    this.start();
+  }
+  
   start(){
     this.propsModded = {...this.props};
     let c = this.propsModded.children;

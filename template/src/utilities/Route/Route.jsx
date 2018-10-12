@@ -1,1 +1,1 @@
-<DOMRoute {...this.propsModded}/>
+this.props && <DOMRoute {...this.propsModded}/>
