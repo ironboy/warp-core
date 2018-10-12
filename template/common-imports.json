@@ -38,6 +38,7 @@
   "{NavLink as RouterNavLink}": "react-router-dom",
   "{Link}": "react-router-dom",
   "{withRouter}": "react-router-dom",
+  "{Switch}": "react-router-dom",
   
   "/*6": "-------------------- MobX --------------------",
   "{observable}": "mobx",
