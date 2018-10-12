@@ -99,13 +99,17 @@ module.exports = function expressStart(basePath){
 
     // Check if the module has been resolved and found within
     // the cache
+    let mem = [];
     if (mod && ((mod = require.cache[mod]) !== undefined)) {
         // Recursively go over the results
         (function traverse(mod) {
             // Go over each of the module's children and
             // traverse them
+            mem.push(mod);
             mod.children.forEach(function (child) {
-                traverse(child);
+                if(mem.indexOf(child) < 0){
+                  traverse(child);
+                }
             });
 
             // Call the specified callback providing the
