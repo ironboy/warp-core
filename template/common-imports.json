@@ -22,6 +22,9 @@
   "  Else": "utilities/Else/Else",
   "  Loop": "utilities/Loop/Loop",
  
+  "/*3.5": "---------  Classes (non-components) --------",
+  "  REST": "classes/REST.js",
+
   "/*4": "--------- Utilities (non-components) ---------",
   "!registerServiceWorker": "utilities/registerServiceWorker",
   "!sleep": "utilities/sleep",

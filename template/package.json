@@ -48,7 +48,7 @@
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
     "react-syntax-highlighter": "^8.0.1",
-    "react-warp-core": "^0.1.67",
+    "react-warp-core": "^0.1.68",
     "reactstrap": "^6.4.0",
     "resolve": "1.6.0",
     "sass-loader": "^7.1.0",
