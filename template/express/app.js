@@ -4,19 +4,20 @@
 */
 let app = global.expressApp;
 
-
 // Set up socket.io
 const io = require('socket.io')(
   global.httpServer, 
   {
-    path: global.production ? '/api' : '/',
+    path: global.production ? '/api/socket' : '/socket',
     serveClient: false
   }
 );
 
 // Basic test of socket.io connectivity
 io.on('connection', function(socket){
-  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });

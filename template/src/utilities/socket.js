@@ -1,2 +1,2 @@
 import openSocket from 'socket.io-client';
-export default openSocket('', {path: '/api/socket.io'});
+export default openSocket('', {path: '/api/socket'});
