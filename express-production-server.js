@@ -18,4 +18,4 @@ server.use((req, res) => {
 });
 
 // start the server
-server.listen(5000, () => console.log('Server listening on port 5000'));
+global.httpServer = server.listen(5000, () => console.log('Server listening on port 5000'));

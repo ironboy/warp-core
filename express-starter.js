@@ -44,6 +44,7 @@ module.exports = function expressStart(basePath){
         restartTimeout = setTimeout(()=>console.log(chalk.bgHex('#0C0').hex('#fff')(center('Restarted the Express app!'))),1000);
         triggerHotReload();
       });
+      global.httpServer = server;
     }
     catch(e){
       console.warn(chalk.bgHex('#C00').hex('#fff')(center('Error in the Express app:')), '\n', e.stack);
