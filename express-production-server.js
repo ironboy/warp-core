@@ -19,5 +19,8 @@ server.use((req, res) => {
 // start the server
 global.httpServer = server.listen(5000, () => console.log('Server listening on port 5000'));
 
-// start the real app
+// a flag to tell us that we are runing in production mode
+global.production = true;
+
+// start the main app
 require(path.join(__dirname, 'express', 'app.js'));

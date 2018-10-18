@@ -4,6 +4,25 @@
 */
 let app = global.expressApp;
 
+
+// Set up socket.io
+const io = require('socket.io')(
+  global.httpServer, 
+  {
+    path: global.production ? '/api' : '/',
+    serveClient: false
+  }
+);
+
+// Basic test of socket.io connectivity
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+
 // Some example data for the Todo app
 app.get('/todo-list-example-data',(req, res) => {
   res.json([
