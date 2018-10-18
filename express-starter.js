@@ -38,13 +38,13 @@ module.exports = function expressStart(basePath){
     global.expressApp = express();
     purgeCache(appPath);
     try {
-      require(appPath);
       server = global.expressApp.listen(port, ()=> {
         clearTimeout(restartTimeout);
         restartTimeout = setTimeout(()=>console.log(chalk.bgHex('#0C0').hex('#fff')(center('Restarted the Express app!'))),1000);
         triggerHotReload();
       });
       global.httpServer = server;
+      require(appPath);
     }
     catch(e){
       console.warn(chalk.bgHex('#C00').hex('#fff')(center('Error in the Express app:')), '\n', e.stack);
